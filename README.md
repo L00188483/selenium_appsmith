@@ -4,6 +4,8 @@
 $ git clone git@github.com:L00188483/selenium_appsmith.git 
 $ cd selenium_appsmith/
 $ python -m venv venv
+$ pip install -r requirements.txt
+
 $ chmod +x docker_restart.sh
 ```
 
@@ -18,11 +20,15 @@ CONTAINER ID   IMAGE                               COMMAND                  CREA
 0ff6d6b233ad   selenium/standalone-chrome:latest   "/opt/bin/entry_poin…"   22 minutes ago   Up 21 minutes   0.0.0.0:4444->4444/tcp, [::]:4444->4444/tcp, 5900/tcp, 0.0.0.0:7900->7900/tcp, [::]:7900->7900/tcp, 9000/tcp   selenium_chrome
 ```
 
+##### run the tests
+```bash
+$ pytest
+```
 
-##### run the test script
+##### run pdb 'main' script
 ```bash
 $ source venv/bin/activate
-$ python selenium_appsmith/main.py
+$ python selenium_appsmith/webpage_interface.py
 ```
 
 
