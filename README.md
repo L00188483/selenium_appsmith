@@ -1,7 +1,7 @@
 
 ##### setup
 ```bash
-$ git clone ...
+$ git clone git@github.com:L00188483/selenium_appsmith.git 
 $ cd selenium_appsmith/
 $ python -m venv venv
 $ chmod +x docker_restart.sh
