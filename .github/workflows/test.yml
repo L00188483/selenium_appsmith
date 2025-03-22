@@ -6,6 +6,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services:
+      selenium-grid:
+        image: selenium/standalone-chrome:latest
+        container_name: selenium_chrome
+        ports:
+          - "4444:4444"
+          - "7900:7900"
+        options: >-
+          --shm-size=2g
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -19,4 +29,4 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Tests
-        run: pytest selenium_appsmith/tests/test_github_aciton.py
+        run: pytest selenium_appsmith/tests/test_github_action.py
