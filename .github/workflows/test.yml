@@ -19,6 +19,9 @@ jobs:
         run: |
           pip install -r requirements.txt
 
+      - name: print location
+        run: echo -e "$(pwd) \n$(ls -l)"
+
       - name: Run Tests
         run: pytest selenium_appsmith/tests/test_github_aciton.py
         working-directory: ./selenium_appsmith
