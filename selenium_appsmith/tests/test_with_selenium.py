@@ -7,6 +7,13 @@ from selenium import webdriver
 from selenium_appsmith.webpage_interface import TodoWebpage
 
 
+#WEBPAGE_URL = "https://app.appsmith.com/app/getting-started-course-v1-app/page1-67dc3444743b81787d0a6ba3?branch=master"
+WEBPAGE_URL = "http://appsmith:8080/app/getting-started-course-v1-app/page1-67de9ba6a34c9e557eb0b55f"
+
+# appsmith health check: /api/v1/health
+# selenium health check: cURL GET 'http://localhost:4444/status'
+
+
 @pytest.fixture
 def page():
     options = ChromeOptions()
@@ -15,7 +22,7 @@ def page():
     )
     time.sleep(1)
 
-    yield TodoWebpage(driver)
+    yield TodoWebpage(driver, WEBPAGE_URL)
     driver.quit()
 
 
