@@ -55,4 +55,4 @@ def check_selenium_grid_health():
 @pytest.hookimpl(tryfirst=True)
 def pytest_sessionstart(session):
     """Runs before tests can begin"""
-    pass  # wait_for_services(120)
+    wait_for_services(120)

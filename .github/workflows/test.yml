@@ -7,6 +7,17 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
+
+      appsmith:
+        image: index.docker.io/appsmith/appsmith-ce
+        ports:
+          - 8080:80
+          - 4431:443
+        volumes:
+          - ./appsmith_storage:/appsmith-stacks
+        options: >-
+          --shm-size=2g
+
       selenium_chrome:
         image: selenium/standalone-chrome:latest
         ports:
