@@ -10,7 +10,7 @@ SELENIUM_BASE_URL_LOCAL = "http://localhost:4444"
 # Appsmith urls
 APPSMITH_BASE_URL_LOCAL = "http://localhost:8080"
 APPSMITH_BASE_URL_DOCKER = "http://appsmith:80"
-WEBPAGE_URL_PATH = "/app/getting-started-course-v1-app/page1-67de9ba6a34c9e557eb0b55f"  # got this URL from the "share" button in Appsmith (and made it public)
+WEBPAGE_URL_PATH = "/app/getting-started-course-v1-app/page1-67df00ef15b9db13e5c83d40"  # got this URL from the "share" button in Appsmith (and made it public)
 
 
 # old stuff
