@@ -16,11 +16,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: print location
-        run: echo -e "$(pwd) \n$(ls -l)"
+        run: pip install -r requirements.txt
 
       - name: Run Tests
         run: pytest selenium_appsmith/tests/test_github_aciton.py
