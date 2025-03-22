@@ -1,19 +1,19 @@
 import time
+from urllib.parse import urljoin
 
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-
-WEBPAGE_URL = "https://app.appsmith.com/app/getting-started-course-v1-app/page1-67dc3444743b81787d0a6ba3?branch=master"
-
+from selenium_appsmith.tests.conftest import (
+    APPSMITH_BASE_URL_DOCKER, WEBPAGE_URL_PATH, SELENIUM_BASE_URL_LOCAL
+)
 
 class TodoWebpage:
 
-    def __init__(self, driver, page_url=WEBPAGE_URL):
+    def __init__(self, driver, page_url):
         self.driver = driver
-        if page_url:
-            self.driver.get(page_url)
-            time.sleep(3)
+        self.driver.get(page_url)
+        time.sleep(3)
 
     def get_tasks(self):
         task_div_elements = self.driver.find_elements(
@@ -83,12 +83,11 @@ def main():
     from selenium import webdriver
     options = ChromeOptions()
     driver = webdriver.Remote(
-        options=options, command_executor="http://localhost:4444"
+        options=options, command_executor=SELENIUM_BASE_URL_LOCAL
     )
 
-    driver.get("https://app.appsmith.com/app/getting-started-course-v1-app/page1-67dc3444743b81787d0a6ba3?branch=master")
-
-    page = TodoWebpage(driver)
+    webpage_url = urljoin(APPSMITH_BASE_URL_DOCKER, WEBPAGE_URL_PATH)
+    page = TodoWebpage(driver, webpage_url)
     tasks = page.get_tasks()
 
     breakpoint()

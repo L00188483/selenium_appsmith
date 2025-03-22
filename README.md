@@ -25,7 +25,7 @@ $ source venv/bin/activate
 $ pytest selenium_appsmith/
 ```
 
-##### run pdb 'main' script
+##### run 'main' pdb script
 ```bash
 $ source venv/bin/activate
 $ python selenium_appsmith/webpage_interface.py
