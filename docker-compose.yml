@@ -10,7 +10,7 @@ services:
 #         - ./appsmith_storage:/appsmith-stacks
 #     restart: unless-stopped
 
-   selenium-grid:
+   selenium_chrome:
      image: selenium/standalone-chrome:latest
      container_name: selenium_chrome
      ports:

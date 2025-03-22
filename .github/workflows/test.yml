@@ -7,9 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      selenium-grid:
+      selenium_chrome:
         image: selenium/standalone-chrome:latest
-        container_name: selenium_chrome
         ports:
           - 4444:4444
           - 7900:7900
