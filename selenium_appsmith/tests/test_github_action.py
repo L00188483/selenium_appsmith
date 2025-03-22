@@ -10,7 +10,7 @@ from selenium_appsmith.tests.conftest import check_appsmith_health, check_seleni
 def test_gh_action():
     assert True
 
-'''
+
 def test_selenium():
     options = ChromeOptions()
     driver = webdriver.Remote(
@@ -20,7 +20,6 @@ def test_selenium():
     time.sleep(1)
     assert driver.title == 'Google'
     driver.quit()
-'''
 
 
 def test_service_health():
