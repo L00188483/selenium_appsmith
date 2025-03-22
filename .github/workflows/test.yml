@@ -14,7 +14,7 @@ jobs:
           - 8080:80
           - 4431:443
         volumes:
-          - ./appsmith_storage:/appsmith-stacks
+          - appsmith-volume:/appsmith-stacks
         options: >-
           --shm-size=2g
 
