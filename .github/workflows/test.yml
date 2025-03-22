@@ -11,8 +11,8 @@ jobs:
         image: selenium/standalone-chrome:latest
         container_name: selenium_chrome
         ports:
-          - "4444:4444"
-          - "7900:7900"
+          - 4444:4444
+          - 7900:7900
         options: >-
           --shm-size=2g
 
