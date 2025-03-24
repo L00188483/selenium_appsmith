@@ -14,7 +14,7 @@ jobs:
           - 8080:80
           - 4431:443
         volumes:
-          "${{ github.workspace }}/selenium_appsmith/tests/appsmith_test_data:/appsmith-stacks"
+          - "${{ github.workspace }}/selenium_appsmith/tests/appsmith_test_data:/appsmith-stacks"
           #- selenium_appsmith/tests/appsmith_test_data:appsmith-stacks
           #- appsmith-volume:/appsmith-stacks
         options: >-
