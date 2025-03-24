@@ -29,6 +29,19 @@ jobs:
           --shm-size=2g
 
     steps:
+
+      - name: Print workspace path
+        run: |
+          echo "Workspace is at: ${{ github.workspace }}"
+
+      - name: Clean up workspace before checkout
+        run: |
+          rm -rf "${{ github.workspace }}/*" # /home/runner/work/selenium_appsmith/*
+
+      - name: Set permissions
+        run: |
+          sudo chmod -R 777 "${{ github.workspace }}"
+
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -45,6 +58,7 @@ jobs:
           unzip -q selenium_appsmith/tests/appsmith_test_data.zip -d selenium_appsmith/tests/appsmith_test_data
           ls -la selenium_appsmith/tests/appsmith_test_data  # Verify contents
           echo -e "$(pwd)"
-
+          CURRENT_USER=$(stat -c '%u' docker-compose.yml)
+          CURRENT_USER=$(stat -c '%g' docker-compose.yml)
       - name: Run Tests
         run: pytest selenium_appsmith/
