@@ -42,7 +42,7 @@ jobs:
 
       - name: Unzip Appsmith's test data volume
         run: |
-          unzip selenium_appsmith/tests/appsmith_test_data.zip -d selenium_appsmith/tests/appsmith_test_data
+          unzip -q selenium_appsmith/tests/appsmith_test_data.zip -d selenium_appsmith/tests/appsmith_test_data
           ls -la selenium_appsmith/tests/appsmith_test_data  # Verify contents
           echo -e "$(pwd)"
 
