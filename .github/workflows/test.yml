@@ -14,8 +14,8 @@ jobs:
           - 8080:80
           - 4431:443
         volumes:
-          - selenium_appsmith/tests/appsmith_test_data:appsmith-stacks
-          #- appsmith-volume:/appsmith-stacks
+          #- selenium_appsmith/tests/appsmith_test_data:appsmith-stacks
+          - appsmith-volume:/appsmith-stacks
         options: >-
           --shm-size=2g
 
@@ -43,6 +43,7 @@ jobs:
         run: |
           unzip selenium_appsmith/tests/appsmith_test_data.zip -d selenium_appsmith/tests/appsmith_test_data
           ls -la selenium_appsmith/tests/appsmith_test_data  # Verify contents
+          echo -e "$(pwd)"
 
       - name: Run Tests
         run: pytest selenium_appsmith/
