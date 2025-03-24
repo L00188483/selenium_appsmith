@@ -14,7 +14,8 @@ jobs:
           - 8080:80
           - 4431:443
         volumes:
-          - appsmith-volume:/appsmith-stacks
+          - selenium_appsmith/tests/appsmith_test_data:appsmith-stacks
+          #- appsmith-volume:/appsmith-stacks
         options: >-
           --shm-size=2g
 
@@ -37,6 +38,11 @@ jobs:
 
       - name: Install Dependencies
         run: pip install -r requirements.txt
+
+      - name: Unzip Appsmith's test data volume
+        run: |
+          unzip selenium_appsmith/tests/appsmith_test_data.zip -d selenium_appsmith/tests/appsmith_test_data
+          ls -la selenium_appsmith/tests/appsmith_test_data  # Verify contents
 
       - name: Run Tests
         run: pytest selenium_appsmith/
