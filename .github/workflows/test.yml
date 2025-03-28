@@ -8,12 +8,6 @@ jobs:
 
     steps:
 
-      - name: Clean up workspace before checkout
-        run: |
-          echo "Workspace is at: ${{ github.workspace }}"
-          rm -rf "${{ github.workspace }}/*" # /home/runner/work/selenium_appsmith/*
-          sudo chmod -R 777 "${{ github.workspace }}"
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
@@ -25,27 +19,7 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
-      - name: Unzip Appsmith's test data volume
-        run: |
-          unzip -q selenium_appsmith/tests/appsmith_test_data.zip -d selenium_appsmith/tests/appsmith_test_data
-          ls -la selenium_appsmith/tests/appsmith_test_data  # Verify contents
-          echo -e "$(pwd)"
-          CURRENT_USER=$(stat -c '%u' docker-compose.yml)
-          CURRENT_USER=$(stat -c '%g' docker-compose.yml)
-
     services:
-
-      appsmith:
-        image: index.docker.io/appsmith/appsmith-ce
-        ports:
-          - 8080:80
-          - 4431:443
-        volumes:
-          - "${{ github.workspace }}/selenium_appsmith/tests/appsmith_test_data:/appsmith-stacks"
-          #- selenium_appsmith/tests/appsmith_test_data:appsmith-stacks
-          #- appsmith-volume:/appsmith-stacks
-        options: >-
-          --shm-size=2g
 
       selenium_chrome:
         image: selenium/standalone-chrome:latest
