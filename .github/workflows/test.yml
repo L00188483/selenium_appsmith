@@ -16,7 +16,7 @@ jobs:
           echo "123" >> dummy_file.txt
 
       - name: save dummy file
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: dummy-artifact
           path: dummy_file.txt
