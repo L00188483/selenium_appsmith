@@ -42,5 +42,13 @@ jobs:
         run: |
           docker run --name selenium_chrome -d -p 4444:4444 -p 7900:7900 --shm-size=2g selenium/standalone-chrome:134.0
 
+      - name: Check containers are running
+        run: |
+          sleep 5
+          docker ps
+          curl http://localhost:4444/status
+          sleep 20
+          curl http://localhost:8080/api/v1/health
+
       - name: Run Tests
         run: pytest selenium_appsmith/
