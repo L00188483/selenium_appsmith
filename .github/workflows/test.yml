@@ -27,10 +27,11 @@ jobs:
 
     steps:
 
-      - uses: actions/download-artifact@v4
-        with:
-          name: dummy-artifact
-          path: dummy_file2.txt
+      - name: download all artifacts
+        uses: actions/download-artifact@v4
+#        with:
+#          name: dummy-artifact
+#          path: dummy_file2.txt
       - name: list files
         run: ls -R
 
