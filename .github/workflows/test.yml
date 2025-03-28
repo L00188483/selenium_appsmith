@@ -3,49 +3,44 @@ name: Python Tests
 on: [push, pull_request]
 
 jobs:
-
-  docker-build:
-    name: Docker build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: create dummy file
-        run: |
-          echo "123" >> dummy_file.txt
-
-      - name: save dummy file
-        uses: actions/upload-artifact@v4
-        with:
-          name: dummy-artifact
-          path: dummy_file.txt
-          retention-days: 1
-
   test:
     runs-on: ubuntu-latest
 
     steps:
 
-      - name: download all artifacts
-        uses: actions/download-artifact@v4
-#        with:
-#          name: dummy-artifact
-#          path: dummy_file2.txt
-      - name: list files
-        run: ls -R
+      - name: Clean up workspace before checkout
+        run: |
+          echo "Workspace is at: ${{ github.workspace }}"
+          rm -rf "${{ github.workspace }}/*" # /home/runner/work/selenium_appsmith/*
+          sudo chmod -R 777 "${{ github.workspace }}"
 
-    services:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      selenium_chrome:
-        image: selenium/standalone-chrome:latest
-        ports:
-          - 4444:4444
-          - 7900:7900
-        volumes:
-          - "${{ github.workspace }}/dummy_file2.txt:/dummy_file2.txt"
-        options: >-
-          --shm-size=2g
-        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
 
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
 
+      - name: Unzip Appsmith's test data volume
+        run: |
+          unzip -q selenium_appsmith/tests/appsmith_test_data.zip -d selenium_appsmith/tests/appsmith_test_data
+          ls -la selenium_appsmith/tests/appsmith_test_data  # Verify contents
+          echo -e "$(pwd)"
+          #CURRENT_USER=$(stat -c '%u' docker-compose.yml)
+          #CURRENT_USER=$(stat -c '%g' docker-compose.yml)
+          sudo chmod -R 777 selenium_appsmith/tests/appsmith_test_data
+
+      - name: Run Appsmith container
+        run: |
+          docker run --name appsmith -v "${{ github.workspace }}/selenium_appsmith/tests/appsmith_test_data:/appsmith-stacks" -p 8080:80 -p 4431:443 --shm-size=2g index.docker.io/appsmith/appsmith-ce:v1.65
+
+      - name: Run Selenium container
+        run: |
+          docker run --name selenium_chrome -p 4444:4444 -p 7900:7900 --shm-size=2g selenium/standalone-chrome:134.0
+
+      - name: Run Tests
+        run: pytest selenium_appsmith/
