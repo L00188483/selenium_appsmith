@@ -3,13 +3,36 @@ name: Python Tests
 on: [push, pull_request]
 
 jobs:
+
+  docker-build:
+    name: Docker build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: create dummy file
+        run: |
+          echo "123" >> dummy_file.txt
+
+      - name: save dummy file
+        uses: actions/upload-artifact@v2
+        with:
+          name: dummy-artifact
+          path: dummy_file.txt
+          retention-days: 1
+
   test:
     runs-on: ubuntu-latest
 
     steps:
 
-      - name: do something
-        run: echo "testing"
+      - uses: actions/download-artifact@v4
+        with:
+          name: dummy-artifact
+          path: dummy_file2.txt
+      - name: list files
+        run: ls -R
 
     services:
 
@@ -18,7 +41,10 @@ jobs:
         ports:
           - 4444:4444
           - 7900:7900
+        volumes:
+          - "${{ github.workspace }}/dummy_file2.txt:/dummy_file2.txt"
         options: >-
           --shm-size=2g
+        
 
 
