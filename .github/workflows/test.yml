@@ -6,6 +6,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    steps:
+
+      - name: do something
+        run: echo "testing"
+
     services:
 
       selenium_chrome:
@@ -16,7 +21,4 @@ jobs:
         options: >-
           --shm-size=2g
 
-    steps:
 
-      - name: do something
-        run: echo "testing"
