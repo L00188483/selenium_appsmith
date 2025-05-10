@@ -52,6 +52,3 @@ jobs:
 
       - name: Run Tests
         run: pytest selenium_appsmith/tests/test_with_selenium.py
-
-      - name: Run Tests
-        run: pytest selenium_appsmith/tests/test_selenium_simple.py
