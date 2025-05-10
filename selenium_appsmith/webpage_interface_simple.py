@@ -29,6 +29,7 @@ def get_tasks(driver):
     )
     return [elem.text for elem in task_div_elements]
 
+
 def main():
     driver = webdriver.Remote(
         options=Options(), command_executor='http://localhost:4444'

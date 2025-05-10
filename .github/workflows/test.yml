@@ -33,6 +33,7 @@ jobs:
           #CURRENT_USER=$(stat -c '%u' docker-compose.yml)
           #CURRENT_USER=$(stat -c '%g' docker-compose.yml)
           sudo chmod -R 777 selenium_appsmith/tests/appsmith_test_data
+          sudo chown -R root:root selenium_appsmith/tests/appsmith_test_data
 
       - name: Run Appsmith container
         run: |

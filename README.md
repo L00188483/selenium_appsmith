@@ -20,6 +20,11 @@ CONTAINER ID   IMAGE                               COMMAND                  CREA
 5b4451eceac7   selenium/standalone-chrome:latest   "/opt/bin/entry_poin…"   43 minutes ago   Up 16 minutes             0.0.0.0:4444->4444/tcp, [::]:4444->4444/tcp, 5900/tcp, 0.0.0.0:7900->7900/tcp, [::]:7900->7900/tcp, 9000/tcp   selenium_chrome
 ```
 
+##### check Appsmith to local instance and setup database
+* go to: http://localhost:8080/
+* TODO: write about manual setup
+
+
 ##### run the tests
 ```bash
 $ source venv/bin/activate

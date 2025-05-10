@@ -3,4 +3,6 @@ __pycache__/
 .idea
 *.pyc
 selenium_appsmith/__pycache__
-appsmith_local/stacks/
+appsmith_local/
+selenium_appsmith/tests/appsmith_test_data
+selenium_appsmith/tests/appsmith_test_data.zip

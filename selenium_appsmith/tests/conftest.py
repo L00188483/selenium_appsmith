@@ -25,6 +25,7 @@ def wait_for_services(timeout):
 
         asmith_health = check_appsmith_health()
         selenium_health = check_selenium_grid_health()
+
         if asmith_health and selenium_health:
             return
 

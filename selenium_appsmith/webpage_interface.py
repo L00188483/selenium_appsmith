@@ -17,8 +17,7 @@ class TodoWebpage:
 
     def get_tasks(self):
         task_div_elements = self.driver.find_elements(
-            By.CSS_SELECTOR, #old: "div[class*='t--widget-list1_taskcontainer']"
-            "div[class*='t--widget-list1_container2']"
+            By.CSS_SELECTOR, "div[class*='t--widget-list1_container2']"
         )
 
         results = []
