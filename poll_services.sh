@@ -30,5 +30,3 @@ sleep 1
 curl -s http://localhost:8080/api/v1/health
 sleep 1
 
-echo "check selenium can reach appsmith container:"
-docker exec selenium_chrome ping appsmith
