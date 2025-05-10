@@ -45,8 +45,8 @@ jobs:
 
       - name: Run polling script
         run: |
-          chmod +x ./poll_endpoints.sh
-          ./poll_endpoints.sh
+          chmod +x ./poll_services.sh
+          ./poll_services.sh
 
       - name: Run Tests
         run: pytest selenium_appsmith/tests/test_with_selenium.py -k test_add_task
