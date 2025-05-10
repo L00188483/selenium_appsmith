@@ -18,7 +18,7 @@ while true; do
   fi
 
   echo "SELENIUM_STATUS=$SELENIUM_STATUS, APPSMITH_STATUS=$APPSMITH_STATUS"
-  docker logs --since 1m  appsmith
+  docker logs --tail 5 appsmith
 
   echo "$(date) - Sleeping for 30 seconds..."
   sleep 30
@@ -26,4 +26,9 @@ done
 
 echo "services launched successfully"
 curl http://localhost:4444/status
+sleep 1
 curl http://localhost:8080/api/v1/health
+sleep 1
+
+echo "check selenium can reach appsmith container:"
+docker exec -it selenium_chrome ping appsmith

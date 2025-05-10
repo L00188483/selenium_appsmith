@@ -21,6 +21,7 @@ def page():
     time.sleep(1)
 
     webpage_url = urljoin(APPSMITH_BASE_URL_DOCKER, WEBPAGE_URL_PATH)
+    print(f'Selenium fetching url: {webpage_url}')
     yield TodoWebpage(driver, webpage_url)
     driver.quit()
 
