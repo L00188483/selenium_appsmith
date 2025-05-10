@@ -11,7 +11,7 @@ def _create_browser():
     driver = webdriver.Remote(
         options=Options(), command_executor='http://localhost:4444'
     )
-    webpage_url = 'http://localhost:8080/app/todo-app/page1-67e8185723be7b0a5efe5ec3'
+    webpage_url = 'http://localhost:8080/app/getting-started-course-v1-app/page1-67df00ef15b9db13e5c83d40'
     driver.get(webpage_url)
     return driver
 

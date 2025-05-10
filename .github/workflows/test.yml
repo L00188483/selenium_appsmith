@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 12
 
     steps:
       - name: Clean up workspace before checkout
@@ -30,8 +30,6 @@ jobs:
           unzip -q selenium_appsmith/tests/appsmith_test_data.zip -d selenium_appsmith/tests/appsmith_test_data
           echo -e "$(pwd)"
           ls -la selenium_appsmith/tests/appsmith_test_data  # Verify contents
-          #CURRENT_USER=$(stat -c '%u' docker-compose.yml)
-          #CURRENT_USER=$(stat -c '%g' docker-compose.yml)
           sudo chmod -R 777 selenium_appsmith/tests/appsmith_test_data
           sudo chown -R root:root selenium_appsmith/tests/appsmith_test_data
 
@@ -53,4 +51,7 @@ jobs:
           ./poll_services.sh
 
       - name: Run Tests
-        run: pytest selenium_appsmith/tests/test_with_selenium.py -k test_add_task
+        run: pytest selenium_appsmith/tests/test_with_selenium.py
+
+      - name: Run Tests
+        run: pytest selenium_appsmith/tests/test_selenium_simple.py
