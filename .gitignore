@@ -4,5 +4,4 @@ __pycache__/
 *.pyc
 selenium_appsmith/__pycache__
 appsmith_local/
-selenium_appsmith/tests/appsmith_test_data
-selenium_appsmith/tests/appsmith_test_data.zip
+selenium_appsmith/tests/appsmith_test_data/
