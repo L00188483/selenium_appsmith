@@ -28,8 +28,8 @@ jobs:
       - name: Unzip Appsmith's test data volume
         run: |
           unzip -q selenium_appsmith/tests/appsmith_test_data.zip -d selenium_appsmith/tests/appsmith_test_data
-          ls -la selenium_appsmith/tests/appsmith_test_data  # Verify contents
           echo -e "$(pwd)"
+          ls -la selenium_appsmith/tests/appsmith_test_data  # Verify contents
           #CURRENT_USER=$(stat -c '%u' docker-compose.yml)
           #CURRENT_USER=$(stat -c '%g' docker-compose.yml)
           sudo chmod -R 777 selenium_appsmith/tests/appsmith_test_data
@@ -37,20 +37,16 @@ jobs:
 
       - name: Run Appsmith container
         run: |
-          docker run --name appsmith -d -v "${{ github.workspace }}/selenium_appsmith/tests/appsmith_test_data:/appsmith-stacks" -p 8080:80 -p 4431:443 --shm-size=2g index.docker.io/appsmith/appsmith-ce:v1.65
+          docker run --name appsmith -d -v "${{ github.workspace }}/selenium_appsmith/tests/appsmith_test_data:/appsmith-stacks" -p 8080:80 -p 4431:443 --shm-size=2g index.docker.io/appsmith/appsmith-ce:v1.64
 
       - name: Run Selenium container
         run: |
           docker run --name selenium_chrome -d -p 4444:4444 -p 7900:7900 --shm-size=2g selenium/standalone-chrome:134.0
 
-      - name: Check containers are running
+      - name: Run polling script
         run: |
-          sleep 5
-          docker ps
-          curl http://localhost:4444/status
-          sleep 90
-          curl http://localhost:8080/api/v1/health
-          docker logs appsmith
+          chmod +x ./poll_endpoints.sh
+          ./poll_endpoints.sh
 
       - name: Run Tests
-        run: pytest selenium_appsmith/
+        run: pytest selenium_appsmith/tests/test_with_selenium.py -k test_add_task
