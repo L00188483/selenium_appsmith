@@ -5,9 +5,9 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
-
       - name: Clean up workspace before checkout
         run: |
           echo "Workspace is at: ${{ github.workspace }}"

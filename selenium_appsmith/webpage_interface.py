@@ -13,6 +13,7 @@ class TodoWebpage:
     def __init__(self, driver, page_url):
         self.driver = driver
         self.driver.get(page_url)
+        
         time.sleep(3)
 
     def get_tasks(self):

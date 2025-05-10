@@ -25,10 +25,10 @@ while true; do
 done
 
 echo "services launched successfully"
-curl http://localhost:4444/status
+curl -s http://localhost:4444/status
 sleep 1
-curl http://localhost:8080/api/v1/health
+curl -s http://localhost:8080/api/v1/health
 sleep 1
 
 echo "check selenium can reach appsmith container:"
-docker exec -it selenium_chrome ping appsmith
+docker exec selenium_chrome ping appsmith
