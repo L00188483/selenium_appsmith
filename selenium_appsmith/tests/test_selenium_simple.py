@@ -1,6 +1,5 @@
 import time
 
-import pytest
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 

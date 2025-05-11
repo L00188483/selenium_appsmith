@@ -3,17 +3,26 @@ services:
    appsmith:
      image: index.docker.io/appsmith/appsmith-ce:v1.64
      container_name: appsmith
+     networks:
+       - appsmith-network
+     volumes:
+      - ./selenium_appsmith/tests/appsmith_test_data:/appsmith-stacks
      ports:
          - "8080:80"
          - "4431:443"
-     volumes:
-        - ./appsmith_local:/appsmith-stacks
-     restart: unless-stopped
+     shm_size: 2g
+     restart: on-failure
 
    selenium_chrome:
      image: selenium/standalone-chrome:134.0
      container_name: selenium_chrome
+     networks:
+       - appsmith-network
      ports:
        - "4444:4444"
        - "7900:7900"
      shm_size: "2g"
+     restart: on-failure
+
+networks:
+  appsmith-network:
