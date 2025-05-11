@@ -5,7 +5,7 @@ import pytest
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium import webdriver
 
-from selenium_appsmith.webpage_interface import TodoWebpage
+from selenium_appsmith.webpage_interface import AppsmithTodoWebpageInterace
 
 from selenium_appsmith.tests.conftest import (
     APPSMITH_BASE_URL_DOCKER, WEBPAGE_URL_PATH, SELENIUM_BASE_URL_LOCAL,
@@ -22,7 +22,17 @@ def page():
 
     webpage_url = urljoin(APPSMITH_BASE_URL_DOCKER, WEBPAGE_URL_PATH)
     print(f'Selenium fetching url: {webpage_url}')
-    yield TodoWebpage(driver, webpage_url)
+
+    page = AppsmithTodoWebpageInterace(driver, webpage_url)  # <---- interface to the Appsmith webpage
+
+    # Future Improvement:
+    # ----------------------------
+    # if platform == 'appsmith':
+    #     page = AppsmithTodoWebpageInterace(driver, webpage_url)
+    # elif platform == 'tooljet':
+    #     page = ToolJetTodoWebpageInterface(driver, webpage_url)
+
+    yield page
     driver.quit()
 
 

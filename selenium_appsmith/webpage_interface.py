@@ -8,7 +8,7 @@ from selenium_appsmith.tests.conftest import (
     APPSMITH_BASE_URL_DOCKER, WEBPAGE_URL_PATH, SELENIUM_BASE_URL_LOCAL
 )
 
-class TodoWebpage:
+class AppsmithTodoWebpageInterace:
 
     def __init__(self, driver, page_url):
         self.driver = driver
@@ -87,7 +87,7 @@ def main():
     )
 
     webpage_url = urljoin(APPSMITH_BASE_URL_DOCKER, WEBPAGE_URL_PATH)
-    page = TodoWebpage(driver, webpage_url)
+    page = AppsmithTodoWebpageInterace(driver, webpage_url)
     tasks = page.get_tasks()
 
     breakpoint()
