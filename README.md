@@ -7,6 +7,10 @@ $ python -m venv venv
 $ pip install -r requirements.txt
 ```
 
+##### Unzip the test data
+```bash
+$ unzip selenium_appsmith/tests/appsmith_test_data.zip -d selenium_appsmith/tests/appsmith_test_data/
+```
 
 ##### run the containers
 ```bash
@@ -20,15 +24,17 @@ CONTAINER ID   IMAGE                               COMMAND                  CREA
 5b4451eceac7   selenium/standalone-chrome:latest   "/opt/bin/entry_poin…"   43 minutes ago   Up 16 minutes             0.0.0.0:4444->4444/tcp, [::]:4444->4444/tcp, 5900/tcp, 0.0.0.0:7900->7900/tcp, [::]:7900->7900/tcp, 9000/tcp   selenium_chrome
 ```
 
-##### Unzip the test data
+##### Optional: Initializing the Appsmith database from scratch
 ```bash
-
+# remove the test data
+$  rm -rf selenium_appsmith/tests/appsmith_test_data/
+# restart the containers
+$ docker-compose down
+$ docker-compose up -d
 ```
-
-##### Set up Appsmith database
 * go to: http://localhost:8080/
 * Register a user
-* Import an application
+* Import an application (a local json file or from a Github repo)
 * Share the application as a public URL, copy it to your clipboard
 * Paste this unique URL path into: `selenium_appsmith/tests/conftests.py:WEBPAGE_URL_PATH`
 
